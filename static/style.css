@@ -1,0 +1,45 @@
+:root {
+    /* BUTTON COLORS */
+    --primary-normal: #003082; /* DARK BLUE */
+    --primary-hover: #004BA0; /* HOVER BLUE */
+    --primary-active: #00255E; /* ACTIVE BLUE */
+    --secondary-normal: #FFC917; /* BRIGHT YELLOW */
+    --secondary-hover: #FFD43B; /* HOVER YELLOW */
+    --secondary-active: #E5B000; /* ACTIVE YELLOW */
+    --text-on-primary: #FFFFFF; /* WHITE */
+
+    /* BACKGROUND COLORS */
+    --background-main: #F0F0F0; /* LIGHT GRAY FOR THE MAIN BACKGROUND */
+    --background-footer: #E1E1E1; /* DARKER GRAY FOR THE FOOTER BACKGROUND */
+    --background-header: #FFFFFF; /* WHITE FOR THE HEADER BACKGROUND */
+}
+
+
+
+body{
+    background-color: var(--background-main);
+}
+
+/* STYLING FOR THE FOOTER */
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--background-footer);
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Optionele schaduw voor een lift-effect */
+}
+
+footer button {
+    padding: 10px 20px;
+    background-color: var(--primary-normal);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}

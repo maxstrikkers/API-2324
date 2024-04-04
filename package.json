@@ -10,8 +10,10 @@
   "author": "Max",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "liquid": "^5.1.1",
+    "liquidjs": "^10.10.2",
     "nodemon": "^3.1.0"
   }
 }
