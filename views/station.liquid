@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  {% include 'partials/head'%}
+  <body>
+    <header>
+      <h1>{{ station }}</h1>
+    </header>
+    <main>
+    <section>
+      <ul class="trainTimes">
+        <div class="trainTimesTitles">
+          <p>Vertrek</p>
+          <p>Naar</p>
+          <p>Spoor</p>
+          <p>Trein</p>
+        </div>
+        {% for train in times %}
+            <ul>
+                <li>{{ train.actualDateTime | date: "%H:%M" }}</li>
+                <div>
+                  <li>{{ train.direction }}</li>
+                  {%  if train.cancelled == true %}<li class="rijdtNiet">Rijdt niet</li>{%  endif %} 
+                </div>
+                <li>{{ train.actualTrack }}</li>
+                <li>{{ train.trainCategory }}</li>
+            </ul>
+        {% endfor %}
+    </ul>
+    </section>
+    </main>
+    {% include 'partials/footer'%}
+    <script src="/script.js"></script>
+  </body>
+</html>

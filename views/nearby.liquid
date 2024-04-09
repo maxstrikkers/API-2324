@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  {% include 'partials/head'%}
+  <body>
+    <header>
+      <h1>{{ message }}</h1>
+      <form id="locationForm">
+        <input type="hidden" id="latInput" name="lat">
+        <input type="hidden" id="longInput" name="long">
+        <button type="submit" id="allowLocation">Huidige locatie gebruiken</button>
+      </form>
+    </header>
+    <main>
+    <section>
+      <ul class="sign">
+        {% for station in stationData %}
+          <a href="station/{{ station.code }}">
+            <li class="sign-text">{{ station.namen.lang }}</li>
+          </a>
+        {% endfor %}
+      </ul>
+    </section>
+    </main>
+    {% include 'partials/footer'%}
+    <script src="/script.js"></script>
+  </body>
+</html>

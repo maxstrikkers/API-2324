@@ -12,29 +12,31 @@
     --background-main: #F0F0F0; /* LIGHT GRAY FOR THE MAIN BACKGROUND */
     --background-footer: #E1E1E1; /* DARKER GRAY FOR THE FOOTER BACKGROUND */
     --background-header: #FFFFFF; /* WHITE FOR THE HEADER BACKGROUND */
+    --background-sign: #003082;
 }
 
-
-
 body{
+    background-color: var(--background-main);
+    font-family: Arial, sans-serif;
     background-color: var(--background-main);
 }
 
 /* STYLING FOR THE FOOTER */
 footer {
-    position: fixed;
+    position: sticky;
     left: 0;
     bottom: 0;
     width: 100%;
     background-color: var(--background-footer);
-    padding: 20px;
+    padding: 1rem 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Optionele schaduw voor een lift-effect */
 }
 
-footer button {
+footer a {
+    text-decoration: none;
     padding: 10px 20px;
     background-color: var(--primary-normal);
     color: white;
@@ -42,4 +44,51 @@ footer button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.sign{
+    display: grid;
+    gap: 1rem;
+}
+
+.sign-text {
+    color: var(--text-on-primary);
+    font-size: 1.5em;
+    text-align: center;
+    list-style-type: none;
+    position: relative;
+    box-shadow: 0.1em 0.1em 0.5em black;
+    background-color: var(--background-sign); /* Dark blue background */
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 50%;
+    &::after{
+        content:'';
+        width: 1.5rem;
+        aspect-ratio: 1;
+        position: absolute;
+        background-color: var(--text-on-primary);
+        left:0;
+        top:0;
+    }
+}
+
+.trainTimesTitles{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: darkgray;
+}
+
+.trainTimes ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    list-style-type: none;
+}
+
+.trainTimes ul:nth-of-type(odd) {
+    background-color: white;
+}
+
+.trainTimes ul:nth-of-type(even) {
+    background-color: darkgray;
 }
