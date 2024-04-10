@@ -1,17 +1,17 @@
 :root {
     /* BUTTON COLORS */
-    --primary-normal: #003082; /* DARK BLUE */
-    --primary-hover: #004BA0; /* HOVER BLUE */
-    --primary-active: #00255E; /* ACTIVE BLUE */
-    --secondary-normal: #FFC917; /* BRIGHT YELLOW */
-    --secondary-hover: #FFD43B; /* HOVER YELLOW */
-    --secondary-active: #E5B000; /* ACTIVE YELLOW */
-    --text-on-primary: #FFFFFF; /* WHITE */
+    --primary-normal: #003082;
+    --primary-hover: #004BA0;
+    --primary-active: #00255E;
+    --secondary-normal: #FFC917;
+    --secondary-hover: #FFD43B;
+    --secondary-active: #E5B000;
+    --text-on-primary: #FFFFFF;
 
     /* BACKGROUND COLORS */
-    --background-main: #F0F0F0; /* LIGHT GRAY FOR THE MAIN BACKGROUND */
-    --background-footer: #E1E1E1; /* DARKER GRAY FOR THE FOOTER BACKGROUND */
-    --background-header: #FFFFFF; /* WHITE FOR THE HEADER BACKGROUND */
+    --background-main: #F0F0F0; 
+    --background-footer: #E1E1E1;
+    --background-header: #FFFFFF;
     --background-sign: #003082;
 }
 
@@ -76,7 +76,7 @@ footer a {
 .trainTimesTitles{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    background-color: darkgray;
+    background-color: var(--background-footer);
 }
 
 .trainTimes ul{
@@ -86,9 +86,9 @@ footer a {
 }
 
 .trainTimes ul:nth-of-type(odd) {
-    background-color: white;
+    background-color: var(--background-header);
 }
 
 .trainTimes ul:nth-of-type(even) {
-    background-color: darkgray;
+    background-color: var(--background-footer);
 }
