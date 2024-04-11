@@ -13,6 +13,10 @@
     --background-footer: #E1E1E1;
     --background-header: #FFFFFF;
     --background-sign: #003082;
+    --black-background: #000000;
+
+    /* OTHER COLORS */
+    --cancel-color: #FF0000;
 }
 
 body{
@@ -20,6 +24,7 @@ body{
     font-family: Arial, sans-serif;
     background-color: var(--background-main);
 }
+
 
 /* STYLING FOR THE FOOTER */
 footer {
@@ -46,9 +51,36 @@ footer a {
     font-size: 16px;
 }
 
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-on-primary);
+    background-color: var(--background-sign);
+    padding: 1rem;
+    border-radius: 5px;
+    width: 20%;
+    box-shadow: 0.1em 0.1em 0.2em black;
+}
+
 .sign{
     display: grid;
     gap: 1rem;
+    a{
+        text-decoration: none;
+    }
+
+}
+
+h1.sign-text{
+    width: 50%;
 }
 
 .sign-text {
@@ -57,38 +89,102 @@ footer a {
     text-align: center;
     list-style-type: none;
     position: relative;
-    box-shadow: 0.1em 0.1em 0.5em black;
-    background-color: var(--background-sign); /* Dark blue background */
+    box-shadow: 0.1em 0.1em 0.2em black;
+    background-color: var(--background-sign);
     border-radius: 5px;
     padding: 20px;
-    max-width: 50%;
     &::after{
         content:'';
         width: 1.5rem;
         aspect-ratio: 1;
         position: absolute;
         background-color: var(--text-on-primary);
+        border-top-left-radius: 5px;
         left:0;
         top:0;
     }
 }
 
 .trainTimesTitles{
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     background-color: var(--background-footer);
 }
 
-.trainTimes ul{
+.trainTimes{
+    list-style-type: none;
+}
+.trainTimes li:first-of-type{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     list-style-type: none;
 }
 
-.trainTimes ul:nth-of-type(odd) {
+.trainTimes a{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    text-decoration: none;
+    color: var(--primary-active);
+}
+
+.trainTimes li:nth-of-type(even) {
+    padding: 0.5rem;
     background-color: var(--background-header);
 }
 
-.trainTimes ul:nth-of-type(even) {
+.trainTimes li:nth-of-type(odd) {
+    padding: 0.5rem;
     background-color: var(--background-footer);
+}
+
+.message{
+    font-style: italic;
+    font-size: 0.8em;
+    color: var(--cancel-color);
+}
+
+.trainRoute {
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.trainTrack{
+    display: flex;
+    position: relative;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--primary-active);
+    background-color: var(--text-on-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &::after{
+        content:'';
+        width: 0.8rem;
+        aspect-ratio: 1;
+        position: absolute;
+        background-color: var(--primary-active);
+        left:0;
+        top:0;
+    }
+}
+
+.trainTrackLetters{
+    position: relative;
+    bottom: 0.3em;
+    font-size: 0.7em;
+}
+
+.trainInformation :first-child{
+    font-weight: bold;
+}
+
+.trainInformation p:nth-child(1),
+.trainInformation p:nth-child(2) {
+    line-height: 0.3; /* Pas deze waarde aan om de afstand te veranderen */
 }

@@ -33,8 +33,27 @@ async function getTrainTimes(station){
     }
 }
 
+async function getTrainInformation(train){
+    try{
+        const response = await fetch('https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein?ids=' + train + '&features=zitplaats&all=false', {
+            method: 'GET',
+            // Request headers
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Ocp-Apim-Subscription-Key': process.env.NS_API_KEY,
+            }
+        });
+        const trainInformation = await response.json();
+        return trainInformation
+    }
+    catch (error) {
+        console.error(error);
+    }
+};
+
 // EXPORTS ALL OF THE FUNCTIONS
 module.exports = {
     getStationsByLocation,
-    getTrainTimes
+    getTrainTimes,
+    getTrainInformation
 };

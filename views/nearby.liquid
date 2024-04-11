@@ -14,7 +14,7 @@
     <section>
       <ul class="sign">
         {% for station in stationData %}
-          <a href="station/{{ station.code }}">
+          <a href="station/{{ station.code }}?name={{ station.namen.lang | url_encode }}">
             <li class="sign-text">{{ station.namen.lang }}</li>
           </a>
         {% endfor %}

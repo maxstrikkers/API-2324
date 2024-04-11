@@ -3,27 +3,56 @@
   {% include 'partials/head'%}
   <body>
     <header>
-      <h1>{{ station }}</h1>
+      <h1 class="sign-text">{{ stationName }}</h1>
+      <h2 id="huidigeTijd"></h2>
     </header>
     <main>
     <section>
       <ul class="trainTimes">
-        <div class="trainTimesTitles">
+        <li class="trainTimesTitles">
           <p>Vertrek</p>
           <p>Naar</p>
           <p>Spoor</p>
           <p>Trein</p>
-        </div>
+        </li>
         {% for train in times %}
-            <ul>
-                <li>{{ train.actualDateTime | date: "%H:%M" }}</li>
-                <div>
-                  <li>{{ train.direction }}</li>
-                  {%  if train.cancelled == true %}<li class="rijdtNiet">Rijdt niet</li>{%  endif %} 
-                </div>
-                <li>{{ train.actualTrack }}</li>
-                <li>{{ train.trainCategory }}</li>
-            </ul>
+          <li>
+            <a href="traindetails/{{ train.product.number }}">
+              <p>{{ train.actualDateTime | date: "%H:%M" }}</p>
+              <div class="trainInformation">
+                <p>{{ train.direction }}</p>
+                <p class="trainRoute">
+                  {%  for station in train.routeStations %}
+                    {% if forloop.first %}
+                      Via 
+                    {% endif %}
+                    {% if forloop.last %}
+                      {{ station.mediumName }}
+                    {% else %}
+                      {{ station.mediumName }},
+                    {% endif %}
+                  {%  endfor %}
+                  </p>
+                  <p class="message">
+                    {% for message in train.messages %}
+                      {{ message.message }}
+                    {% endfor %}
+                  </p>
+              </div>
+              <div class="trainTrack">
+                {% assign trackChars = train.actualTrack | split: '' %}
+                {% assign letters = '' %}
+                {% for char in trackChars %}
+                    {% if char >= 'a' and char <= 'z' or char >= 'A' and char <= 'Z' %}
+                        {% capture letters %}{{ letters }}{{ char }}{% endcapture %}
+                    {% endif %}
+                {% endfor %}
+                <p>{{ train.actualTrack | replace: letters, '' }}</p>
+                <p class="trainTrackLetters">{{ letters }}</p>
+              </div>
+              <p>{{ train.product.longCategoryName }}</p>
+            </a>
+          </li>
         {% endfor %}
     </ul>
     </section>
