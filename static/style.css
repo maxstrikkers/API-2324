@@ -183,15 +183,3 @@ h1.sign-text{
 .trainInformation :first-child{
     font-weight: bold;
 }
-
-.trainInformation p:nth-child(1),
-.trainInformation p:nth-child(2) {
-    line-height: 1;
-}
-
-@media (min-width: 768px) {
-    .trainInformation p:nth-child(1),
-    .trainInformation p:nth-child(2) {
-        line-height: 0.3;
-    }
-}
