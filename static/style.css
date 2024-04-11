@@ -186,5 +186,12 @@ h1.sign-text{
 
 .trainInformation p:nth-child(1),
 .trainInformation p:nth-child(2) {
-    line-height: 0.3; /* Pas deze waarde aan om de afstand te veranderen */
+    line-height: 0.6;
+}
+
+@media (min-width: 768px) {
+    .trainInformation p:nth-child(1),
+    .trainInformation p:nth-child(2) {
+        line-height: 0.3;
+    }
 }
