@@ -49,7 +49,7 @@ app.get('/station/traindetails/:train', async function(req, res){
     res.render('traindetails', { stationName: 'test' });
 })
 
-app.listen(5000);
+app.listen(5500);
 
 
 
