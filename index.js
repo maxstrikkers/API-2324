@@ -44,9 +44,8 @@ app.get('/station/:code', async function(req, res){
 })
 
 app.get('/station/traindetails/:train', async function(req, res){
-    const trainInformation = await getTrainInformation(trainDetails.params.train);
+    const trainInformation = await getTrainInformation(req.params.train);
     console.log(trainInformation)
-
     res.render('traindetails', { stationName: 'test' });
 })
 
