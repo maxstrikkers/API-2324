@@ -29,4 +29,3 @@ if (window.location.pathname.includes('/station/')) {
     const huidigeTijd = document.getElementById('huidigeTijd');
     huidigeTijd.textContent = time;
 }
-

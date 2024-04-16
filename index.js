@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const { Liquid } = require('liquidjs');
 const app = express();
-const { getStationsByLocation, getTrainTimes, getTrainInformation } = require('./functions');
+const { getStationsByLocation, getTrainTimes, getTrainInformation, getTrainRoute } = require('./functions');
 
 require('dotenv').config();
 
@@ -45,8 +45,12 @@ app.get('/station/:code', async function(req, res){
 
 app.get('/station/traindetails/:train', async function(req, res){
     const trainInformation = await getTrainInformation(req.params.train);
-    console.log(trainInformation)
-    res.render('traindetails', { stationName: 'test' });
+    const trainRoute = await getTrainRoute(req.params.train);
+    // trainRoute.payload.stops.forEach(stop => {
+    //     console.log(stop.stop.name);
+    //     console.log(stop.status)
+    // });
+    res.render('traindetails', { trainInformation: trainInformation[0], trainRoute: trainRoute.payload.stops});
 })
 
 app.listen(5500);
