@@ -17,6 +17,16 @@ app.set('view engine', 'liquid'); // set liquid as the view engine
 
 app.use(express.static('static'));
 
+// Specifieke route voor de service worker
+app.get('/service-worker.js', (req, res) => {
+    res.sendFile(__dirname + '/service-worker.js');
+  });
+  
+  // Specifieke route voor het manifest
+  app.get('/manifest.json', (req, res) => {
+    res.sendFile(__dirname + '/manifest.json');
+  });
+
 app.get('/', function (req, res) {
     let message = "Home page"
     res.render('index', { message: message });

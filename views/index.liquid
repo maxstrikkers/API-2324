@@ -11,6 +11,22 @@
     </section>
     </main>
     {% include 'partials/footer'%}
-    <script src="/script.js"></script>
+    <script>
+      fetch('/script.js')
+        .then(response => response.text())
+        .then(scriptContent => {
+          eval(scriptContent);
+    
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+              console.log('Service Worker registered with scope:', registration.scope);
+            }).catch(function(error) {
+              console.log('Service Worker registration failed:', error);
+            });
+          }
+        })
+        .catch(error => console.error('Failed to load script.js', error));
+    </script>
+    
   </body>
 </html>
