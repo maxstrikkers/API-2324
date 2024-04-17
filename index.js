@@ -50,7 +50,6 @@ app.get('/favorites', function (req, res) {
 
 app.get('/station/:code', async function(req, res){
     const trainTimes = await getTrainTimes(req.params.code);
-    console.log(trainTimes.payload)
     res.render('station', { stationName: req.query.name ,stationCode: req.params.code, times: trainTimes.payload.departures });
 })
 

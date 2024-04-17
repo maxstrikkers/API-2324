@@ -25,7 +25,6 @@ if (window.location.pathname.includes('/nearby')) {
 if (window.location.pathname.includes('/station/')) {
     const now = new Date();
     const time = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
-
     const huidigeTijd = document.getElementById('huidigeTijd');
     huidigeTijd.textContent = time;
 }
