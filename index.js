@@ -57,10 +57,6 @@ app.get('/station/:code', async function(req, res){
 app.get('/station/traindetails/:train', async function(req, res){
     const trainInformation = await getTrainInformation(req.params.train);
     const trainRoute = await getTrainRoute(req.params.train);
-    // trainRoute.payload.stops.forEach(stop => {
-    //     console.log(stop.stop.name);
-    //     console.log(stop.status)
-    // });
     res.render('traindetails', { trainInformation: trainInformation[0], trainRoute: trainRoute.payload.stops});
 })
 
