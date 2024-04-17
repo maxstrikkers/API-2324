@@ -18,9 +18,9 @@
         {% for train in times %}
           <li>
             <a href="traindetails/{{ train.product.number }}">
-            <p>{{ train.actualDateTime | date: "%H:%M", "Europe/Amsterdam" }}</p>
+            <p class="trainDepartureTime">{{ train.actualDateTime | date: "%H:%M", "Europe/Amsterdam" }}</p>
               <div class="trainInformation">
-                <p>{{ train.direction }}</p>
+                <p class="trainTo">{{ train.direction }}</p>
                 <p class="trainRoute">
                   {%  for station in train.routeStations %}
                     {% if forloop.first %}
