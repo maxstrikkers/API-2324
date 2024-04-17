@@ -18,8 +18,8 @@
         {% for train in times %}
           <li>
             <a href="traindetails/{{ train.product.number }}">
-              <p>{{ train.actualDateTime | date: "%H:%M" }}</p>
-              <p> {{ train.actualDateTime }}</p>
+            <p>{{ train.actualDateTime | date: "%H:%M", "Europe/Amsterdam" }}</p>
+            <p> {{ train.actualDateTime }}</p>
               <div class="trainInformation">
                 <p>{{ train.direction }}</p>
                 <p class="trainRoute">
