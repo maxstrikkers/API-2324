@@ -145,6 +145,8 @@ h1.sign-text{
 .trainTimesTitles{
     position: relative;
     display: grid;
+    font-size: 1.8rem;
+    font-weight: bold;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     background-color: var(--background-footer);
 }
@@ -250,17 +252,21 @@ h1.sign-text{
 
 /* STYLING FOR THE TRAIN ROUTE GROUP */
 .trainRouteGroup {
-    background-color: var(--background-footer);
+    background-color: var(--background-sign);
     display: grid;
-    gap: 1rem;
+    align-items: center;
+    gap: 2rem;
     list-style-type: none;
-    padding: 0;
+    padding: 3rem;
+    border-radius: 1rem;
 }
 
 .trainRouteGroup li {
     position: relative;
     list-style-type: none;
-    padding-left: 40px; 
+    padding-left: 3rem;
+    font-size: 3rem;
+    color: var(--background-main);
 }
 
 .trainRouteGroup li::before {
@@ -269,20 +275,20 @@ h1.sign-text{
     left: 0; 
     top: 50%;
     transform: translateY(-50%);
-    width: 1rem;
-    height: 1rem; 
+    width: 2rem;
+    height: 2rem; 
     border-radius: 50%;
-    background-color: var(--dark-gray-background);
+    background-color: var(--background-main);
 }
 
 .trainRouteGroup li::after {
     content: '';
     position: absolute;
-    left: 0.3rem;
+    left: 0.75rem;
     top: 50%;
-    width: 0.4rem;
-    height: 2rem;
-    background-color: var(--dark-gray-background);
+    width: 0.5rem;
+    height: 5rem;
+    background-color: var(--background-main);
 }
 
 .trainRouteGroup li:first-child::after {
@@ -295,9 +301,9 @@ h1.sign-text{
 }
 
 .trainRouteGroup li.trainPassed::before {
-    background-color: var(--background-sign); 
+    background-color: var(--secondary-active); 
 }
 
 .trainRouteGroup li.trainPassed::after {
-    background-color: var(--background-sign); 
+    background-color: var(--secondary-active); 
 }

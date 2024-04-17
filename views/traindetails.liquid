@@ -9,6 +9,7 @@
       {% endfor %} 
     </div>
     <ul class="trainRouteGroup">
+      <h2>Route</h2>
       {% for train in trainRoute %}
         {% assign arrivalTime = train.arrivals[0].actualTime | date: '%s' %}
         {% assign currentTime = 'now' | date: '%s' %}

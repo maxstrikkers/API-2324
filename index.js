@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const { Liquid } = require('liquidjs');
+const cookieParser = require('cookie-parser');
 const app = express();
 const { getStationsByLocation, getTrainTimes, getTrainInformation, getTrainRoute } = require('./functions');
 
@@ -16,6 +17,8 @@ app.set('views', path.resolve(__dirname, 'views')); // set views location
 app.set('view engine', 'liquid'); // set liquid as the view engine
 
 app.use(express.static('static'));
+
+app.use(cookieParser());
 
 // Specifieke route voor de service worker
 app.get('/service-worker.js', (req, res) => {
@@ -34,7 +37,9 @@ app.get('/', function (req, res) {
 
 app.get('/nearby', async function (req, res) {
     let message = 'Nearby'
-    const stationData = await getStationsByLocation(req.query.lat, req.query.long);
+    res.cookie('lat', req.query.lat);
+    res.cookie('long', req.query.long);
+    const stationData = await getStationsByLocation(req.cookies.lat, req.cookies.long);
     res.render('nearby', { message: message, stationData: stationData.payload });
 });
 
