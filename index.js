@@ -73,13 +73,27 @@ app.get('/favorites', function (req, res) {
 app.get('/station/:code', async function(req, res){
     const trainTimes = await getTrainTimes(req.params.code);
     const stationName = await searchForStation(req.params.code);
-    res.render('station', { stationName: stationName.payload[0].namen.lang ,stationCode: req.params.code, times: trainTimes.payload.departures });
-})
+    console.log(req.query)
+    const likeStatus = 'liked'
+    
+    // Read the existing list from the cookie
+    let likedList = req.cookies.liked ? JSON.parse(req.cookies.liked) : [];
+
+    if(likeStatus == 'liked'){
+        // Check if the station is not already in the list
+        if (!likedList.includes(req.params.code)) {
+            likedList.push(req.params.code);
+            let likedListJSON = JSON.stringify(likedList);
+            res.cookie('liked', '');
+        }
+    }
+    console.log(req.cookies.liked)
+    res.render('station', { stationName: stationName.payload[0].namen.lang ,stationCode: req.params.code, times: trainTimes.payload.departures, likedStatus: 'liked' });
+});
 
 app.get('/station/traindetails/:train', async function(req, res){
     const trainInformation = await getTrainInformation(req.params.train);
     const trainRoute = await getTrainRoute(req.params.train);
-    console.log(trainInformation[0])
     res.render('traindetails', { trainInformation: trainInformation[0], trainRoute: trainRoute.payload.stops, faciliteiten: trainInformation[0].materieeldelen[0].faciliteiten});
 })
 

@@ -21,6 +21,13 @@ if (window.location.pathname.includes('/nearby')) {
 }
 
 if (window.location.pathname.includes('/station/')) {
+    const likeButton = document.getElementById('likeButton');
+    console.log(likeButton);
+    likeButton.addEventListener('click', function() {
+        if(likeButton.value == 'Liked'){
+            likeButton.value = 'Not liked';
+        }
+    });
     const now = new Date();
     const time = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
     const huidigeTijd = document.getElementById('huidigeTijd');
