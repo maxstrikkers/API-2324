@@ -12,8 +12,6 @@ if (window.location.pathname.includes('/nearby')) {
                 longInput.value = position.coords.longitude;
                 locationForm.submit();
             }, function(error) {
-                latInput.value = 52.3781;
-                longInput.value = 4.9003;
                 locationForm.submit();
             });
         } else {

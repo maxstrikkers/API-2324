@@ -1,75 +1,53 @@
 const { response } = require("express");
 
-async function getStationsByLocation(lat, lng) {
+async function fetchData(url) {
     try {
-        const response = await fetch('https://gateway.apiportal.ns.nl/nsapp-stations/v2/nearest?lat='+ lat +'&lng=' + lng +'&limit=10&includeNonPlannableStations=false', {
+        const response = await fetch(url, {
             method: 'GET',
-            // Request headers
             headers: {
                 'Cache-Control': 'no-cache',
                 'Ocp-Apim-Subscription-Key': process.env.NS_API_KEY,
             }
         });
-        const stations = await response.json();
-        return stations
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error(error);
     }
 }
 
-async function getTrainTimes(station){
-    try {
-        const response = await fetch('https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?station=' + station, {
-            method: 'GET',
-            // Request headers
-            headers: {
-                'Cache-Control': 'no-cache',
-                'Ocp-Apim-Subscription-Key': process.env.NS_API_KEY,
-            }
-        });
-        const trainTimes = await response.json();
-        return trainTimes
-    }
-     catch (error) {
-        console.error(error);
+async function getStationsByLocation(lat, lng) {
+    if((lat == undefined || lat == "") && (lng == undefined || lng == "")){
+        return "No Location Access"
+    } else {
+        const url = 'https://gateway.apiportal.ns.nl/nsapp-stations/v2/nearest?lat='+ lat +'&lng=' + lng +'&limit=5&includeNonPlannableStations=false';
+        const stations = await fetchData(url);
+        return stations;
     }
 }
 
+async function getTrainTimes(station){
+    const url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?station=' + station;
+    const trainTimes = await fetchData(url);
+    return trainTimes;
+}
+
 async function getTrainInformation(train){
-    try{
-        const response = await fetch('https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein?ids=' + train + '&features=zitplaats&all=false', {
-            method: 'GET',
-            // Request headers
-            headers: {
-                'Cache-Control': 'no-cache',
-                'Ocp-Apim-Subscription-Key': process.env.NS_API_KEY,
-            }
-        });
-        const trainInformation = await response.json();
-        return trainInformation
-    }
-    catch (error) {
-        console.error(error);
-    }
-};
+    const url = 'https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein?ids=' + train + '&features=zitplaats&all=false';
+    const trainInformation = await fetchData(url);
+    return trainInformation;
+}
 
 async function getTrainRoute(train){
-    try{
-        const response = await fetch('https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/journey?train=' + train, {
-            method: 'GET',
-            // Request headers
-            headers: {
-                'Cache-Control': 'no-cache',
-                'Ocp-Apim-Subscription-Key': process.env.NS_API_KEY,
-            }
-        });
-        const trainRoute = await response.json();
-        return trainRoute
-    }
-    catch (error) {
-        console.error(error);
-    }
-    return(response)
+    const url = 'https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/journey?train=' + train;
+    const trainRoute = await fetchData(url);
+    return trainRoute;
+}
+
+async function searchForStation(query){
+    const url = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations?q=" + query +"&countryCodes=NL&limit=5"
+    const stations = await fetchData(url);
+    return stations
 }
 
 // EXPORTS ALL OF THE FUNCTIONS
@@ -77,5 +55,6 @@ module.exports = {
     getStationsByLocation,
     getTrainTimes,
     getTrainInformation,
-    getTrainRoute
+    getTrainRoute,
+    searchForStation
 };

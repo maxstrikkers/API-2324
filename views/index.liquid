@@ -7,7 +7,20 @@
     </header>
     <main>
     <section>
-    
+      <section>
+        <form class="stationSearch" action="/" method="get">
+          <input type="search" name="q" placeholder="Zoek..." value="{{ q }}">
+          <button type="submit">Zoek</button>
+        </form>
+    </section>
+    <section class="listOfStations">
+      <ul class="sign">
+        {% for station in stationData.payload %}
+          <a href="station/{{ station.code }}?name={{ station.namen.lang | url_encode }}">
+            <li class="sign-text">{{ station.namen.lang }}</li>
+          </a>
+        {% endfor %}
+      </ul>
     </section>
     </main>
     {% include 'partials/footer'%}
