@@ -72,13 +72,15 @@ app.get('/favorites', function (req, res) {
 
 app.get('/station/:code', async function(req, res){
     const trainTimes = await getTrainTimes(req.params.code);
-    res.render('station', { stationName: req.query.name ,stationCode: req.params.code, times: trainTimes.payload.departures });
+    const stationName = await searchForStation(req.params.code);
+    res.render('station', { stationName: stationName.payload[0].namen.lang ,stationCode: req.params.code, times: trainTimes.payload.departures });
 })
 
 app.get('/station/traindetails/:train', async function(req, res){
     const trainInformation = await getTrainInformation(req.params.train);
     const trainRoute = await getTrainRoute(req.params.train);
-    res.render('traindetails', { trainInformation: trainInformation[0], trainRoute: trainRoute.payload.stops});
+    console.log(trainInformation[0])
+    res.render('traindetails', { trainInformation: trainInformation[0], trainRoute: trainRoute.payload.stops, faciliteiten: trainInformation[0].materieeldelen[0].faciliteiten});
 })
 
 app.listen(5500);

@@ -8,37 +8,47 @@
         <img src={{ train.afbeelding }}>
       {% endfor %} 
     </div>
-    <ul class="trainRouteGroup">
-      <h2>Route</h2>
-      {% for train in trainRoute %}
-        {% assign arrivalTime = train.arrivals[0].actualTime | date: '%s' %}
-        {% assign currentTime = 'now' | date: '%s' %}
-        {% assign departureTime = train.departures[0].actualTime | date: '%s' %}
-
-        {% comment %} CHECKES IF THE STATION HAS THE STATUS STOP MEANING THAT THE TRAIN WILL STOP AT THAT STATION {% endcomment %}
-        {% if train.status == 'STOP' %}
-            {% if departureTime < currentTime %}
-                <li class="trainPassed"> {{ train.stop.name }}</li>
-            {% else %}
-                <li class="trainNotPassed"> {{ train.stop.name }}</li>
-            {% endif %}
-        {% comment %} Checks if the station has the status ORIGIN meaning that the train will start at that station {% endcomment %}
-        {% elsif train.status == 'ORIGIN' %}
-            {% if departureTime < currentTime %}
-                <li class="trainPassed"> {{ train.stop.name }}</li>
-            {% else %}
-                <li class="trainNotPassed"> {{ train.stop.name }}</li>
-            {% endif %}
-        {% comment %} Checks if the station has the status DESTINATION meaning that the train will stop at that station {% endcomment %}
-        {% elsif train.status == 'DESTINATION' %}
-            {% if arrivalTime < currentTime %}
-                <li class="trainPassed"> {{ train.stop.name }}</li>
-            {% else %}
-                <li class="trainNotPassed"> {{ train.stop.name }}</li>
-            {% endif %}
-        {% endif %}
-      {% endfor %}
-    </ul>
+    <section>
+      <ul class="trainInformationGroup">
+        <h2>{{ trainInformation.vervoerder }} Trein</h2>
+        <li>Trein nummer: {{ trainInformation.ritnummer }}</li>
+        <li>Trein vervoerder: {{ trainInformation.vervoerder }}</li>
+        <li>Ritnummer: {{ trainInformation.ritnummer }}</li>
+        <li>Materieel: 
+          {% for materieeldelen in trainInformation.materieeldelen %} 
+            {{ materieeldelen.materieelnummer }}{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        </li>
+        <div class="faciliteitenGroup">
+          {% for facility in faciliteiten %}
+            <li><span class={{ facility }}></span></li>
+          {% endfor %}
+        </div>
+      </ul>
+      <ul class="trainRouteGroup">
+        <h2>Route</h2>
+        {% for train in trainRoute %}
+          {% assign arrivalTime = train.arrivals[0].actualTime | date: '%s' %}
+          {% assign currentTime = 'now' | date: '%s' %}
+          {% assign departureTime = train.departures[0].actualTime | date: '%s' %}
+          {% comment %} CHECKES IF THE STATION HAS THE STATUS STOP or ORIGIN MEANING THAT THE TRAIN WILL STOP AT THAT STATION OR COMES FROM THAT STATION {% endcomment %}
+          {% if train.status == 'STOP' or train.status == 'ORIGIN' %}
+              {% if departureTime < currentTime %}
+                  <li class="trainPassed"><a href="/station/{{ train.id | split: '_' | first }}"> {{ train.stop.name }} </a></li>
+              {% else %}
+                  <li class="trainNotPassed"><a href="/station/{{ train.id | split: '_' | first }}"> {{ train.stop.name }} </a></li>
+              {% endif %}
+          {% comment %} Checks if the station has the status DESTINATION meaning that the train will stop at that station {% endcomment %}
+          {% elsif train.status == 'DESTINATION' %}
+              {% if arrivalTime < currentTime %}
+                  <li class="trainPassed"> <a href="/station/{{ train.id | split: '_' | first }}"> {{ train.stop.name }} </a></li>
+              {% else %}
+                  <li class="trainNotPassed"> <a href="/station/{{ train.id | split: '_' | first }}"> {{ train.stop.name }} </a></li>
+              {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+      </section>
     {% include 'partials/footer'%}
   </body>
 </html>

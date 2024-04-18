@@ -1,3 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+
+
 :root {
     /* BUTTON COLORS */
     --primary-normal: #003082;
@@ -27,13 +36,6 @@ body{
     padding-bottom: 15rem;
 }
 
-/* STYLING FOR THE MAIN */
-main{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /* STYLING FOR THE FOOTER */
 footer {
     position: fixed;
@@ -54,7 +56,6 @@ footer a {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-decoration: none;
     padding: 1rem;
     background-color: var(--primary-normal);
     height: 75%;
@@ -99,7 +100,6 @@ header h2{
     padding: 1rem 2rem;
     background-color: var(--secondary-normal);
     color: var(--black-background);
-    text-decoration: none;
     text-align: center;
     border-radius: 1rem;
     border: 0;
@@ -123,7 +123,7 @@ header h2{
 
 .stationSearch input[type="search"] {
     width: 100%;
-    padding: 2rem;
+    padding: 1.5rem;
     border: none;
     margin-right: 0.5rem;
     font-size: 2rem;
@@ -133,13 +133,16 @@ header h2{
 }
 
 .stationSearch button[type="submit"] {
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 1.5rem;
     border: none;
-    font-size: 2.5rem;
     background-color: var(--secondary-active);
     color: var(--black-background);
     cursor: pointer;
+    svg{
+        height: 3rem;
+        width: 3rem;
+    }
 }
 
 /* Responsive styling for mobile devices */
@@ -195,7 +198,6 @@ header h2{
     gap: 1rem;
     a{
         font-size: 2rem;
-        text-decoration: none;
     }
 }
 
@@ -205,7 +207,7 @@ h1.sign-text{
 
 .sign-text {
     color: var(--text-on-primary);
-    font-size: 1.5em;
+    font-size: 2rem;
     text-align: center;
     list-style-type: none;
     position: relative;
@@ -251,7 +253,6 @@ h1.sign-text{
     justify-content: center;
     gap: 1rem;
     grid-template-columns: 0.5fr 2.5fr 0.5fr 0.5fr;
-    text-decoration: none;
     color: var(--primary-active);
     font-size: 1.5rem;
 }
@@ -333,6 +334,34 @@ h1.sign-text{
     display: none; /* Verberg de scrollbar */
 }
 
+/* STYLING FOR THE TRAIN INFORMATION GROUP */
+.trainInformationGroup{
+    background-color: var(--background-sign);
+    border-radius: 1rem;
+    list-style: none;
+    padding: 3rem;
+    color: var(--background-main);
+}
+
+.faciliteitenGroup{
+    display: flex;
+}
+
+.faciliteitenGroup li{
+    display: flex;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    border: 0.2rem solid;
+    height: 5rem;
+    width: 5rem;
+    span{
+        height: 4rem;
+        width: 4rem;
+    }
+}
+
 /* STYLING FOR THE TRAIN ROUTE GROUP */
 .trainRouteGroup {
     background-color: var(--background-sign);
@@ -344,12 +373,19 @@ h1.sign-text{
     border-radius: 1rem;
 }
 
-.trainRouteGroup li {
+.trainRouteGroup h2{
+    font-size: 3rem;
+    color: var(--background-main);
+}
+
+.trainRouteGroup li{
     position: relative;
     list-style-type: none;
     padding-left: 3rem;
     font-size: 3rem;
-    color: var(--background-main);
+    a{
+        color: var(--background-main);
+    }    
 }
 
 .trainRouteGroup li::before {
@@ -391,3 +427,78 @@ h1.sign-text{
     background-color: var(--secondary-active); 
 }
 
+/* SVG FOR TRAINDETAILPAGE */
+
+.TOILET {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cg fill='%23000'%3E%3Cpath d='M10.348 7.643c0-1.112.488-1.754 1.318-1.754c.682 0 1.139.47 1.187 1.108H14v-.11c-.053-1.187-1.024-2-2.342-2c-1.604 0-2.518 1.05-2.518 2.751v.747c0 1.7.905 2.73 2.518 2.73c1.314 0 2.285-.792 2.342-1.939v-.114h-1.147c-.048.615-.497 1.05-1.187 1.05c-.839 0-1.318-.62-1.318-1.727zM4.457 11l1.02-4.184h.045L6.542 11h1.006L9 5.001H7.818l-.82 4.355h-.056L5.97 5.001h-.94l-.972 4.355h-.053l-.827-4.355H2L3.452 11z'/%3E%3Cpath d='M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z'/%3E%3C/g%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    }
+
+.TOEGANKELIJK {
+    display: inline-block;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='m14 16l1.32 1.76C14.32 19.68 12.31 21 10 21c-3.31 0-6-2.69-6-6c0-2.43 1.46-4.5 3.55-5.45l.21 2.17C6.71 12.44 6 13.63 6 15c0 2.21 1.79 4 4 4c1.86 0 3.41-1.28 3.86-3zm5.55.11l-1.25.62L15.5 13h-4.59l-.2-2H14V9h-3.5l-.3-3c1.01-.12 1.8-.96 1.8-2a2 2 0 1 0-4 0v.1L9.1 15h5.4l3.2 4.27l2.75-1.37z'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    }
+
+.FIETS {
+    display: inline-block;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='m35.745 12.17l-4.925 1.48l3.28 8.578a8 8 0 1 1-1.868.715l-1.648-4.31l-5.682 11.802A1 1 0 0 1 24 31h-4.062A8.001 8.001 0 0 1 4 30a8 8 0 0 1 15.938-1h2.5l-4.88-13.664A.998.998 0 0 1 17.5 15H16a1 1 0 1 1 0-2h4.5a1 1 0 1 1 0 2h-.938l1.842 5.157l8.127-4.277l-.965-2.523a1 1 0 0 1 .647-1.315l5.957-1.787zm-13.662 9.89l1.972 5.52l4.23-8.784zm12.983 8.297l-2.113-5.527a6 6 0 1 0 1.868-.715l2.113 5.528a1 1 0 0 1-1.868.714M17.917 29H12a1 1 0 1 0 0 2h5.917A6.002 6.002 0 0 1 6 30a6 6 0 0 1 11.917-1' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    }
+
+.WIFI {
+    display: inline-block;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='m6.35 15.35l-2.1-2.15q1.55-1.55 3.55-2.375T12 10t4.213.838t3.537 2.412l-2.1 2.1q-1.125-1.125-2.588-1.737T12 13t-3.062.613T6.35 15.35M2.1 11.1L0 9q2.375-2.425 5.488-3.713T12 4t6.513 1.288T24 9l-2.1 2.1q-1.975-1.975-4.538-3.037T12 7T6.637 8.063T2.1 11.1M12 21l-3.525-3.55q.7-.7 1.613-1.075T12 16t1.913.375t1.612 1.075z'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    }
+
+.STROOM {
+    display: inline-block;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M16.01 7L16 3h-2v4h-4V3H8v4h-.01C7 6.99 6 7.99 6 8.99v5.49L9.5 18v3h5v-3l3.5-3.51v-5.5c0-1-1-2-1.99-1.99'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    }
+
+.STILTE{
+    display: inline-block;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M15.4 16L14 14.6l2.6-2.6L14 9.4L15.4 8l2.6 2.6L20.6 8L22 9.4L19.4 12l2.6 2.6l-1.4 1.4l-2.6-2.6zM3 15V9h4l5-5v16l-5-5z'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
