@@ -180,6 +180,31 @@ header h2{
     height: 10rem;
 }
 
+/* STYLING FOR THE LIKE BUTTON */
+.likeButton {
+    background: none;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+
+.likeButton svg {
+    background-color: var(--background-sign);
+    width: 15rem;
+    height: 5rem;
+    padding: 0.5rem 1rem;
+    box-shadow: 0.1em 0.1em 0.2em black;
+    border-radius: 1.5rem;
+}
+
+.liked svg path {
+    fill: var(--secondary-active);
+}
+
+.notLiked svg path {
+    fill: grey;
+}
+
 
 .stationName{
     background-color: var(--background-sign);

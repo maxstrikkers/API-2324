@@ -7,6 +7,9 @@ const { getStationsByLocation, getTrainTimes, getTrainInformation, getTrainRoute
 
 require('dotenv').config();
 
+app.use(express.urlencoded({ extended: true }));
+
+
 const engine = new Liquid({
     root: path.resolve(__dirname, 'views'),  // set templates location
     extname: '.liquid'  // set file extension
@@ -65,36 +68,74 @@ app.get('/nearby', async function (req, res) {
 });
 
 
-app.get('/favorites', function (req, res) {
+app.get('/favorites', async function (req, res) {
     let message = 'favorites'
-    res.render('favorites', { message: message });
+    let likedStations = req.cookies.likedStations;
+    let stationsToDisplay = [];
+
+    if(likedStations != undefined){
+        likedStations = JSON.parse(likedStations);
+    }
+
+    for (const station in likedStations) {
+        const stationInfo =  await searchForStation(station);
+        stationsToDisplay.push(stationInfo.payload[0]);
+    }
+    res.render('favorites', { message: message, stationData: stationsToDisplay });
 });
 
 app.get('/station/:code', async function(req, res){
     const trainTimes = await getTrainTimes(req.params.code);
     const stationName = await searchForStation(req.params.code);
-    console.log(req.query)
-    const likeStatus = 'liked'
-    
-    // Read the existing list from the cookie
-    let likedList = req.cookies.liked ? JSON.parse(req.cookies.liked) : [];
+    let likedStations = req.cookies.likedStations;
+    let likedStatus = ''
 
-    if(likeStatus == 'liked'){
-        // Check if the station is not already in the list
-        if (!likedList.includes(req.params.code)) {
-            likedList.push(req.params.code);
-            let likedListJSON = JSON.stringify(likedList);
-            res.cookie('liked', '');
-        }
+    if(likedStations == undefined){
+        likedStations = {};
+    } else {
+        likedStations = JSON.parse(likedStations);
+    };
+    
+    if(req.params.code in likedStations){
+        likedStatus = 'liked';
+    } else {
+        likedStatus = 'notLiked';
+    }   
+    // res.clearCookie('likedStations');
+
+    res.render('station', { stationName: stationName.payload[0].namen.lang ,stationCode: req.params.code, times: trainTimes.payload.departures, likedStatus: likedStatus});
+});
+
+app.post('/station/:code', async function(req, res){
+    const trainTimes = await getTrainTimes(req.params.code);
+    const stationName = await searchForStation(req.params.code);
+    let stationCode = stationName.payload[0].code;
+    let likedStations = req.cookies.likedStations
+    let likedStatus = ''
+
+    // MAAKT EEN JSON OBJECT AAN ALS DE COOKIE LEEG IS OM DEZE LATER TE VULLEN
+    if (likedStations) {
+        likedStations = JSON.parse(likedStations);
+    } else {
+        likedStations = {};
     }
-    console.log(req.cookies.liked)
-    res.render('station', { stationName: stationName.payload[0].namen.lang ,stationCode: req.params.code, times: trainTimes.payload.departures, likedStatus: 'liked' });
+
+    if(!(stationCode in likedStations)){
+        likedStations[stationCode] = true;
+        likedStatus = 'liked';
+        res.cookie('likedStations', JSON.stringify(likedStations));
+    } else if((stationCode in likedStations)){
+        delete likedStations[stationCode];
+        likedStatus = 'notLiked';
+        res.cookie('likedStations', JSON.stringify(likedStations));
+    }
+    res.render('station', { stationName: stationName.payload[0].namen.lang ,stationCode: req.params.code, times: trainTimes.payload.departures, likedStatus: likedStatus });
 });
 
 app.get('/station/traindetails/:train', async function(req, res){
     const trainInformation = await getTrainInformation(req.params.train);
     const trainRoute = await getTrainRoute(req.params.train);
-    res.render('traindetails', { trainInformation: trainInformation[0], trainRoute: trainRoute.payload.stops, faciliteiten: trainInformation[0].materieeldelen[0].faciliteiten});
+    res.render('traindetails', { trainInformation: trainInformation[0], trainRoute: trainRoute.payload.stops, faciliteiten: trainInformation[0].materieeldelen[0]});
 })
 
 app.listen(5500);

@@ -6,9 +6,15 @@
       <h1>{{ message }}</h1>
     </header>
     <main>
-    <section>
-    
-    </section>
+      <section class="listOfStations">
+        <ul class="sign">
+          {% for station in stationData %}
+            <a href="station/{{ station.code }}?name={{ station.namen.lang | url_encode }}">
+              <li class="sign-text">{{ station.namen.lang }}</li>
+            </a>
+          {% endfor %}
+        </ul>
+      </section>
     </main>
     {% include 'partials/footer'%}
     <script src="/script.js"></script>
