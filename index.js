@@ -87,6 +87,7 @@ app.get('/favorites', async function (req, res) {
 app.get('/station/:code', async function(req, res){
     const trainTimes = await getTrainTimes(req.params.code);
     const stationName = await searchForStation(req.params.code);
+
     let likedStations = req.cookies.likedStations;
     let likedStatus = ''
 
